@@ -1,6 +1,6 @@
 import json, secrets, os, re
 
-def interim_session(remembered_words, halfmem, wrong_words):
+def interim_session(remembered_words, right_words, wrong_words):
     if os.path.exists("interim.json"):
         print("Past session review:\n")
 
@@ -21,11 +21,11 @@ def interim_session(remembered_words, halfmem, wrong_words):
                         print("repeated word, good job remembering :)\n")
                     else:
                         remembered_words.append(remember)
-                        halfmem.remove(remember)
+                        right_words.append(remember)
             print("--------------------"*4)
     else:
         last_session = []
-    return remembered_words, halfmem, wrong_words
+    return remembered_words, right_words, wrong_words
 
 def session(SESSION_SIZE, remembered_words, halfmem, available_words):
     today_session = []
@@ -52,5 +52,6 @@ def session(SESSION_SIZE, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
