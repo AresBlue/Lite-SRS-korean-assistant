@@ -10,6 +10,8 @@ The tool is entirely based around CLI, and you should first grab a vocab list, p
 
 From here, follow these steps:
 
+prereq: PIP PyPDF2 if not installed already.
+
 **1:** Download vocab PDF, place in main program directory run PDF_parser.py, input name of PDF file without file extension('example', not 'example.pdf')
 **2:** Run main.py within a CLI interface, PowerShell, CMD, terminal, whatever you want. And from there, you will be given a word list for memorization.
 **3:** focus on given word list, and the next day, rerun the program, and it will go over the previously given word list, it's currently pedantic and precise, so don't be too discouraged if wrong.
@@ -22,4 +24,5 @@ Current customization is just to alter the session size for each day, which is w
 
 REQUIREMENTS:
 
-PyPDF2 module.
+
+PyPDF2 python module.
