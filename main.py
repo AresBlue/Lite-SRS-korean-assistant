@@ -15,7 +15,7 @@ def main():
     print("--------------------"*4)
 
 
-    remembered_words, wrong_words = session.interim_session(remembered_words, wrong_words)
+    remembered_words, halfmem, wrong_words = interim_session(remembered_words, halfmem, wrong_words)
 
 
     with open("remembered_words.json", "w", encoding="utf-8") as f:
@@ -46,4 +46,5 @@ def main():
         print(f"{incrim}: {w['korean']} - {w['english']}")
 
 if __name__ == "__main__":
+
     main()
