@@ -1,4 +1,4 @@
-import json, secrets
+import json, secrets, os, re
 
 def interim_session(remembered_words, wrong_words):
     if os.path.exists("interim.json"):
@@ -8,15 +8,15 @@ def interim_session(remembered_words, wrong_words):
             last_session = json.load(f)
 
             for remember in last_session:
-                attempt = input(f"{remember['korean']}?").strip().lower()
-                solution = [w.strip().lower() for w in remember['english'].split(',')]
+                attempt = input(f"{remember['korean']}? Please enter answer: ").strip().lower()
+                solution = [re.sub(r'[^a-z\s]', '', w).lower().strip() for w in remember['english'].split(',')]
                 if attempt not in solution:
                     wrong_words.append(remember)
-                    print(f"Wrong! Correct answer(s) for {remember['korean']}: {remember['english']}\n")
+                    print(f"Wrong! Correct answer(s) for {remember['korean']}: {remember['english']}, {solution}\n")
                     if remember in remembered_words:
                         print("It was in remembered words... write it down in your book for active external focus.\n")
                 else:
-                    print(f"Correct :) the solution for {remember['korean']} is/are {remember['english']}\n")
+                    print(f"Correct :) the solution for {remember['korean']} is/are {remember['english']}, {solution}\n")
                     if remember in remembered_words:
                         print("repeated word, good job remembering :)\n")
                     else:
