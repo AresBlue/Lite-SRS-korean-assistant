@@ -25,10 +25,10 @@ def main():
     halfmem += wrong_words
 
     for word in right_words:
-    try:
-        halfmem.remove(word)
-    except ValueError:
-        pass
+        try:
+            halfmem.remove(word)
+        except ValueError:
+            pass
 
     with open("halfmem.json", "w", encoding="utf-8") as f:
         json.dump(halfmem, f, ensure_ascii=False, indent=2)
@@ -55,5 +55,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
