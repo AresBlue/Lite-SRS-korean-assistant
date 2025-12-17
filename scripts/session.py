@@ -12,11 +12,11 @@ def interim_session(remembered_words, wrong_words):
                 solution = [re.sub(r'[^a-z\s]', '', w).lower().strip() for w in remember['english'].split(',')]
                 if attempt not in solution:
                     wrong_words.append(remember)
-                    print(f"Wrong! Correct answer(s) for {remember['korean']}: {remember['english']}, {solution}\n")
+                    print(f"Wrong! Correct answer(s) for {remember['korean']}: {solution}\n")
                     if remember in remembered_words:
                         print("It was in remembered words... write it down in your book for active external focus.\n")
                 else:
-                    print(f"Correct :) the solution for {remember['korean']} is/are {remember['english']}, {solution}\n")
+                    print(f"Correct :) the solution for {remember['korean']} is/are: {solution}\n")
                     if remember in remembered_words:
                         print("repeated word, good job remembering :)\n")
                     else:
@@ -49,4 +49,5 @@ def session(SESSION_SIZE, remembered_words, halfmem, available_words):
                     word = secrets.choice(available_words)
                 today_session.append(word)
                 available_words.remove(word)
+
     return today_session, available_words
