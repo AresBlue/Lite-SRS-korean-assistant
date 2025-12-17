@@ -21,6 +21,7 @@ def interim_session(remembered_words, wrong_words):
                         print("repeated word, good job remembering :)\n")
                     else:
                         remembered_words.append(remember)
+                        halfmem.remove(remember)
             print("--------------------"*4)
     else:
         last_session = []
@@ -51,3 +52,4 @@ def session(SESSION_SIZE, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
