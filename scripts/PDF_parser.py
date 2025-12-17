@@ -3,7 +3,7 @@ import re, json, random, time
 
 def pdf_parser():
     pdf_pointer = input("Please enter pdf file name without file extension('example', not 'example.pdf'): ")
-    with open(f"{pdf_pointer}.pdf", "rb") as f:
+    with open(f"../{pdf_pointer}.pdf", "rb") as f:
         reader = PyPDF2.PdfReader(f)
         text = ""
         for page in reader.pages:
@@ -19,11 +19,11 @@ def pdf_parser():
         for entry in entries:
             learning_words.append({"korean": entry[1].strip(), "english": entry[2].strip()})
 
-    sample = learning_words[random.choice(learning_words)]
-    user_input = input(f"If the following is similar to this: 'korean': '경기장', 'english': 'stadium, arena' \nThen enter Y, else, PDF not compatable with parser.\n{sample}\nY/n:")
+    sample = str(random.choice(learning_words))
+    user_input = input(f"If the following is similar to this: 'korean': '경기장', 'english': 'stadium, arena' \nThen enter Y, else, PDF not compatible with parser.\n{sample}\nY/n:")
 
     if user_input.lower() != "y":
-        print("Warning: The import may have formatting issues.")
+        print("Warning: The import may have formatting issues, please use a different PDF.")
         time.sleep(5)
         exit()
     else:
@@ -33,4 +33,3 @@ def pdf_parser():
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
 
 pdf_parser()
-
