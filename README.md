@@ -10,7 +10,7 @@ The tool is entirely based around CLI, and you should first grab a vocab list, p
 
 From here, follow these steps:
 
-prereq: PIP PyPDF2 if not installed already.
+prereq: PIP PyPDF2 if not installed already, my advice is to set up venv within the pulled repo directory via 'python -m venv venv' and then pip install pypdf2.
 
 **1:** Download vocab PDF, place in main program directory run PDF_parser.py, input name of PDF file without file extension('example', not 'example.pdf')
 **2:** Run main.py within a CLI interface, PowerShell, CMD, terminal, whatever you want. And from there, you will be given a word list for memorization.
@@ -26,3 +26,4 @@ REQUIREMENTS:
 
 
 PyPDF2 python module.
+
