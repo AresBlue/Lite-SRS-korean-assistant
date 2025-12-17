@@ -24,7 +24,7 @@ def main():
 
     halfmem += wrong_words
 
-    for word in good_words:
+    for word in right_words:
     try:
         halfmem.remove(word)
     except ValueError:
@@ -55,4 +55,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
