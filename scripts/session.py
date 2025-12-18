@@ -1,57 +1,59 @@
-import json, secrets, os, re
+import json
+from scripts import Message, wordlist_state, io_handler, session
 
-def interim_session(remembered_words, right_words, wrong_words):
-    if os.path.exists("interim.json"):
-        print("Past session review:\n")
+def main():
+    wrong_words = []
+    right_words = []
+    SESSION_SIZE = 34 #set to whatever you want, future me :)
 
-        with open("interim.json", "r", encoding="utf-8") as f:
-            last_session = json.load(f)
+    remembered_words, halfmem, lst_total_length, loaded_words = io_handler.import_backup()
 
-            for remember in last_session:
-                attempt = input(f"{remember['korean']}? Please enter answer: ").strip().lower()
-                solution = [re.sub(r'[^a-z\s]', '', w).lower().strip() for w in remember['english'].split(',')]
-                if attempt not in solution:
-                    wrong_words.append(remember)
-                    print(f"Wrong! Correct answer(s) for {remember['korean']}: {solution}\n")
-                    if remember in remembered_words:
-                        print("It was in remembered words... write it down in your book for active external focus.\n")
-                else:
-                    print(f"Correct :) the solution for {remember['korean']} is/are: {solution}\n")
-                    if remember in remembered_words:
-                        print("repeated word, good job remembering :)\n")
-                    else:
-                        remembered_words.append(remember)
-                        right_words.append(remember)
-            print("--------------------"*4)
-    else:
-        last_session = []
-    return remembered_words, right_words, wrong_words
+    lst_length = len(loaded_words)
 
-def session(SESSION_SIZE, remembered_words, halfmem, available_words):
-    today_session = []
-    for _ in range(SESSION_SIZE):
-        r = secrets.randbelow(100)
-        if r < 5 and remembered_words:
-            word = secrets.choice(remembered_words)
-            while word in today_session:
-                word = secrets.choice(remembered_words)
-            today_session.append(word)
-        elif r < 35 and halfmem:
-            word = secrets.choice(halfmem)
-            while word in today_session:
-                word = secrets.choice(halfmem)
-            today_session.append(word)
-        else:
-            if available_words:
-                retry = 0
-                word = secrets.choice(available_words)
-                while word in today_session and retry < len(available_words):
-                    retry += 1
-                    word = secrets.choice(available_words)
-                today_session.append(word)
-                available_words.remove(word)
+    print("\nKorean SRS learning assistant, good luck.")
+    print("--------------------"*4)
+    Message.message_of_today(lst_length, lst_total_length, len(halfmem))
+    print("--------------------"*4)
 
-    return today_session, available_words
 
+    remembered_words, right_words, wrong_words = session.interim_session(remembered_words, right_words, wrong_words)
+
+
+    with open("remembered_words.json", "w", encoding="utf-8") as f:
+        json.dump(remembered_words, f, ensure_ascii=False, indent=2)
+
+    halfmem += wrong_words
+
+    for word in right_words:
+        try:
+            halfmem.remove(word)
+        except ValueError:
+            pass
+
+    with open("halfmem.json", "w", encoding="utf-8") as f:
+        json.dump(halfmem, f, ensure_ascii=False, indent=2)
+
+    available_words = [w for w in loaded_words if w not in remembered_words and w not in halfmem]
+
+
+    SESSION_SIZE = wordlist_state.word_list_check(SESSION_SIZE, lst_length, halfmem)
+
+    today_session, available_words = session.session(SESSION_SIZE, remembered_words, halfmem, available_words)
+
+    with open("interim.json", "w", encoding="utf-8") as f:
+        json.dump(today_session, f, ensure_ascii=False, indent=2)
+
+    with open("learning_vocab.json", "w", encoding="utf-8") as f:
+        json.dump(available_words, f, ensure_ascii=False, indent=2)
+
+    print("Today's session:")
+    increm = 0
+    for w in today_session:
+        increm += 1
+        print(f"{increm}: {w['korean']} - {w['english']}")
+
+if __name__ == "__main__":
+
+    main()
 
 
