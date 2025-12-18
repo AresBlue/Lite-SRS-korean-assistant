@@ -29,8 +29,10 @@ def pdf_parser():
     else:
         print("Import looks good!")
     with open("learning_vocab.json", "w", encoding="utf-8") as f:
-
+        json.dump(learning_words, f, ensure_ascii=False, indent=2)
+    with open("learning_vocab-static.json", "w", encoding="utf-8") as f:
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
 
 pdf_parser()
+
 
