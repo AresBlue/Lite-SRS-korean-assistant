@@ -11,9 +11,9 @@ def main():
     lst_length = len(loaded_words)
 
     print("\nKorean SRS learning assistant, good luck.")
-    print("--------------------"*4)
+    Message.spacer()
     Message.message_of_today(lst_length, lst_total_length, len(halfmem))
-    print("--------------------"*4)
+    Message.spacer()
 
 
     remembered_words, right_words, wrong_words = session.interim_session(remembered_words, right_words, wrong_words)
@@ -47,13 +47,12 @@ def main():
         json.dump(available_words, f, ensure_ascii=False, indent=2)
 
     print("Today's session:")
-    incrim = 0
-    for w in today_session:
-        incrim += 1
-        print(f"{incrim}: {w['korean']} - {w['english']}")
+    for i, w in enumerate(today_session, start=1):
+        print(f"{i}: {w['korean']} - {w['english']}")
 
 if __name__ == "__main__":
 
     main()
+
 
 
