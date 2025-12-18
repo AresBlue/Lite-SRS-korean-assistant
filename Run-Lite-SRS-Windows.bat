@@ -9,4 +9,5 @@ IF NOT EXIST "learning_vocab.json" (
     python scripts\PDF_parser.py
 )
 
-python main.py %*
+python main.py
+
