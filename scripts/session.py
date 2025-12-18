@@ -1,4 +1,5 @@
 import json, secrets, os, re
+from scripts import Message
 
 def interim_session(remembered_words, right_words, wrong_words):
     if os.path.exists("interim.json"):
@@ -24,7 +25,7 @@ def interim_session(remembered_words, right_words, wrong_words):
                     else:
                         remembered_words.append(remember)
                         right_words.append(remember)
-            print("--------------------"*4)
+            Message.spacer()
     else:
         last_session = []
     return remembered_words, right_words, wrong_words
@@ -54,5 +55,6 @@ def session(SESSION_SIZE, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
