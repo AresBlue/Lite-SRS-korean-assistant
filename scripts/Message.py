@@ -15,4 +15,6 @@ def message_of_today(lst_length, lst_total_length, halfmem_length):
         print(f"Just starting out, but you can do it! {percentage:.1f}% left so far!")
     else:
         print(f"You can do it! {percentage:.1f}% to do so far!")
-
+        
+def spacer():
+    print("--------------------"*4)
