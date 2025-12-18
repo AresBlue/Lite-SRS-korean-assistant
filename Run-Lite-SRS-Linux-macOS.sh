@@ -10,4 +10,4 @@ if [ ! -f "learning_vocab.json" ]; then
     python scripts/PDF_parser.py
 fi
 
-python main.py "$@"
+python main.py
