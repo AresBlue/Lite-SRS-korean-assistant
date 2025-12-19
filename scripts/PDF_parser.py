@@ -3,6 +3,7 @@ import re, json, random, time
 import Message
 
 def pdf_parser():
+    Message.spacer()
     pdf_pointer = input("Please enter pdf file name without file extension('example', not 'example.pdf'): ")
     with open(f"{pdf_pointer}.pdf", "rb") as f:
         reader = PyPDF2.PdfReader(f)
@@ -19,7 +20,7 @@ def pdf_parser():
         entries = re.findall(r'(\d+)([^\d]+?)\s([^\d]+?)(?=\d|$)', line)
         for entry in entries:
             learning_words.append({"korean": entry[1].strip(), "english": entry[2].strip()})
-
+    Message.spacer()
     sample = str(random.choice(learning_words))
     user_input = input(f"If the following is similar to this: 'korean': '경기장', 'english': 'stadium, arena' \nThen enter Y, else, PDF not compatible with parser.\n{sample}\nY/n:")
 
@@ -40,6 +41,7 @@ def pdf_parser():
     time.sleep(1)
 
 pdf_parser()
+
 
 
 
