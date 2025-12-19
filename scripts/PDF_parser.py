@@ -1,5 +1,6 @@
 import PyPDF2
 import re, json, random, time
+from scripts import Message
 
 def pdf_parser():
     pdf_pointer = input("Please enter pdf file name without file extension('example', not 'example.pdf'): ")
@@ -43,6 +44,7 @@ def pdf_parser():
         time.sleep(1)
 
 pdf_parser()
+
 
 
 
