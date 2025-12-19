@@ -1,7 +1,7 @@
 @echo off
 IF NOT EXIST ".venv" python -m venv .venv
 call .venv\Scripts\activate
-pip install --upgrade pip
+python.exe -m pip install --upgrade pip
 pip install -r requirements.txt
 
 IF NOT EXIST "learning_vocab.json" (
@@ -10,4 +10,5 @@ IF NOT EXIST "learning_vocab.json" (
 )
 
 python main.py
+
 
