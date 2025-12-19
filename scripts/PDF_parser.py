@@ -34,16 +34,13 @@ def pdf_parser():
     with open("learning_vocab-static.json", "w", encoding="utf-8") as f:
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
 
-    try:
-        Message.spacer()
-        print("Import finished, to quit please Ctrl+C...\n")
-        while True:
-            time.sleep(0.1)
-    except KeyboardInterrupt:
-        print("Exiting PDF_parser. goodluck...")
-        time.sleep(1)
+    Message.spacer()
+    time.sleep(0.1)
+    print("Exiting PDF_parser. goodluck...")
+    time.sleep(1)
 
 pdf_parser()
+
 
 
 
