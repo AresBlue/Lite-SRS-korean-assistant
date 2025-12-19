@@ -20,7 +20,7 @@ def interim_session(remembered_words, right_words, wrong_words):
                     if remember in remembered_words:
                         print("It was in remembered words... write it down in your book for active external focus.\n")
                 else:
-                    print(f"Correct :) the solution for {remember['korean']} is/are: {solution}\n")
+                    print(f"Correct :) the solution for {remember['korean']} is/are: {', '.join(solution)}\n")
                     if remember in remembered_words:
                         print("repeated word, good job remembering :)\n")
                     else:
@@ -56,6 +56,7 @@ def session(session_size, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
 
