@@ -7,10 +7,12 @@ The tool is entirely based around CLI, and you should first grab a vocab list, p
 **Link: https://learning-korean.com/pdf/**
 
 **Guide**
-From here, run either Run-Lite-SRS-Linux-macOS.sh or Run-Lite-SRS-Windows.bat, and from there everything should be self explanatory. Also, note; please run within a pre-existing terminal, otherwise you'll need to read the words of the day from the intrim.json directly due to the autoclosing terminal... I'll add in a keyboard interupt hold soon.
+From here, run either Run-Lite-SRS-Linux-macOS.sh or Run-Lite-SRS-Windows.bat, and from there, you will be directed to point the PDF_parser towards the vocab list PDF within main directory by name and asked if the parser grabbed the layout succesfully.
+From here, you will be given the session word list, and then each time you rerun the script, you will have the previous word list quizzed on what they mean, its slightly off pedantic, but it's fully functional.
 
 **Customization:**
-Current customization is just to alter the session size for each day, which is within the main.py script at the very top, change it as seen fit.
+Current customization is just to alter the session size for each day as well as the percentages of past words and words you got wrong in previous runs, which is within the config.py script at the very top, change it as seen fit.
 
 REQUIREMENTS:
 PyPDF2 python.
+
