@@ -1,5 +1,5 @@
 import time
-def word_list_check(SESSION_SIZE, lst_length, halfmem):
+def word_list_check(session_size, lst_length, halfmem):
     mem_length = len(halfmem)
     if lst_length == 0 and mem_length == 0:
         print("wordlist empty, please delete learning_vocab.json and relaunch from bat/bash.")
@@ -10,3 +10,4 @@ def word_list_check(SESSION_SIZE, lst_length, halfmem):
         return lst_length + mem_length
     else:
         return SESSION_SIZE
+
