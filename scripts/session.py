@@ -1,5 +1,6 @@
 import json, secrets, os, re
 from scripts import Message
+from config import config
 
 def interim_session(remembered_words, right_words, wrong_words):
     if os.path.exists("interim.json"):
@@ -30,16 +31,16 @@ def interim_session(remembered_words, right_words, wrong_words):
         last_session = []
     return remembered_words, right_words, wrong_words
 
-def session(SESSION_SIZE, remembered_words, halfmem, available_words):
+def session(session_size, remembered_words, halfmem, available_words):
     today_session = []
-    for _ in range(SESSION_SIZE):
+    for _ in range(session_size):
         r = secrets.randbelow(100)
-        if r < 5 and remembered_words:
+        if r < config["remembered_wordlist_pull"] and remembered_words:
             word = secrets.choice(remembered_words)
             while word in today_session:
                 word = secrets.choice(remembered_words)
             today_session.append(word)
-        elif r < 35 and halfmem:
+        elif r < config["halfmem_wordlist_pull"] and halfmem:
             word = secrets.choice(halfmem)
             while word in today_session:
                 word = secrets.choice(halfmem)
@@ -55,6 +56,7 @@ def session(SESSION_SIZE, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
 
