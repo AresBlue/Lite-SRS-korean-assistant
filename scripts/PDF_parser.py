@@ -40,10 +40,11 @@ def pdf_parser():
         while True:
             time.sleep(0.1)
     except KeyboardInterrupt:
-        print("Exiting PDF_parser. please relaunch from .bat/.sh....")
+        print("Exiting PDF_parser. goodluck...")
         time.sleep(1)
 
 pdf_parser()
+
 
 
 
