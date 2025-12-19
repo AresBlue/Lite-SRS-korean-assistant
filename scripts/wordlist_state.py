@@ -5,9 +5,10 @@ def word_list_check(session_size, lst_length, halfmem):
         print("wordlist empty, please delete learning_vocab.json and relaunch from bat/bash.")
         time.sleep(5)
         exit()
-    elif lst_length + mem_length < SESSION_SIZE:
+    elif lst_length + mem_length < session_size:
         print("Congrats, this is your final session for this word-list!")
         return lst_length + mem_length
     else:
-        return SESSION_SIZE
+        return session_size
+
 
