@@ -9,18 +9,24 @@ def interim_session(remembered_words, right_words, wrong_words):
         with open("interim.json", "r", encoding="utf-8") as f:
             last_session = json.load(f)
 
-            for remember in last_session:
-                attempt = input(f"{remember['korean']}? Please enter answer: ").strip().lower()
+            quiz_list = []
+
+            while last_session:
+                idx = secrets.randbelow(len(last_session))
+                quiz_list.append(last_session.pop(idx))
+
+            for remember in quiz_list:
+                attempt = input(f"\033[1;32m{remember['korean']}?\033[0m Please enter answer: ").strip().lower()
                 solution = [re.sub(r'[^a-z\s]', '', w).lower().strip() for w in remember['english'].split(',')]
                 attempt_words = attempt.split()
                 attempt_words.append(attempt)
                 if not any(ans in solution for ans in attempt_words):
                     wrong_words.append(remember)
-                    print(f"Wrong! Correct answer(s) for {remember['korean']}: {solution}\n")
+                    print(f"Wrong! Correct answer(s) for \033[1;31m{remember['korean']}: {solution}\033[0m\n")
                     if remember in remembered_words:
                         print("It was in remembered words... write it down in your book for active external focus.\n")
                 else:
-                    print(f"Correct :) the solution for {remember['korean']} is/are: {', '.join(solution)}\n")
+                    print(f"Correct :) the solution for \033[1;32m{remember['korean']}\033[0m is/are: \033[1;32m{', '.join(solution)}\033[0m\n")
                     if remember in remembered_words:
                         print("repeated word, good job remembering :)\n")
                     else:
@@ -56,6 +62,7 @@ def session(session_size, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
 
