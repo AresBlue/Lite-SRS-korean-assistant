@@ -5,11 +5,15 @@ import Message
 def pdf_parser():
     Message.spacer()
     pdf_pointer = input("Please enter pdf file name without file extension('example', not 'example.pdf'): ")
-    with open(f"{pdf_pointer}.pdf", "rb") as f:
-        reader = PyPDF2.PdfReader(f)
-        text = ""
-        for page in reader.pages:
-            text += page.extract_text()
+    text = ""
+    while len(text) == 0:
+        try:
+            with open(f"{pdf_pointer}.pdf", "rb") as f:
+                reader = PyPDF2.PdfReader(f)
+                for page in reader.pages:
+                    text += page.extract_text()
+        except FileNotFoundError:
+            pdf_pointer = input("File not found... please check PDF name and try again('example', not 'example.pdf'): ")
 
     learning_words = []
 
@@ -41,6 +45,7 @@ def pdf_parser():
     time.sleep(1)
 
 pdf_parser()
+
 
 
 
