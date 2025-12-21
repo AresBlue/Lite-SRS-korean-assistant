@@ -22,11 +22,11 @@ def interim_session(remembered_words, right_words, wrong_words):
                 attempt_words.append(attempt)
                 if not any(ans in solution for ans in attempt_words):
                     wrong_words.append(remember)
-                    print(f"Wrong! Correct answer(s) for \033[1;31m{remember['korean']}: {solution}\033[0m\n")
+                    print(f"Wrong! Correct answer{'s' if len(solution) > 1 else ''} for \033[1;31m{remember['korean']}\033[0m {'are' if len(solution) > 1 else 'is'}: \033[1;31m{solution}\033[0m\n")
                     if remember in remembered_words:
-                        print("It was in remembered words... write it down in your book for active external focus.\n")
+                        print("\033[1;31mIt was in remembered words... write it down in your book for active external focus.\033[0m\n")
                 else:
-                    print(f"Correct :) the solution for \033[1;32m{remember['korean']}\033[0m is/are: \033[1;32m{', '.join(solution)}\033[0m\n")
+                    print(f"Correct :) the solution{'s' if len(solution) > 1 else ''} for \033[1;32m{remember['korean']}\033[0m {'are' if len(solution) > 1 else 'is'}: \033[1;32m{', '.join(solution)}\033[0m\n")
                     if remember in remembered_words:
                         print("repeated word, good job remembering :)\n")
                     else:
@@ -62,6 +62,7 @@ def session(session_size, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
 
