@@ -1,21 +1,50 @@
 import PyPDF2
-import re, json, random, time
+import re
+import json
+import random
+import time
 import Message
+import os
 
 def pdf_parser():
     Message.spacer()
-    pdf_pointer = input("Please enter pdf file name without file extension('example', not 'example.pdf'): ")
-    text = ""
+
+    target_dir = os.path.join(os.path.dirname(__file__), "..")
+
+    local_pdf = []
+
+    for f in os.listdir(target_dir):
+        if f.endswith(".pdf"):
+            local_pdf.append(f)
+
+    if len(local_pdf) == 0:
+        print("No PDF files found, please place PDF files in main directory...")
+
+        while len(local_pdf) == 0:
+            time.sleep(10)
+            print('...')
+            for f in os.listdir(target_dir):
+                if f.endswith(".pdf"):
+                    local_pdf.append(f)
+
+    for num, pdf in enumerate(local_pdf):
+        print(f"{num+1}: {pdf}")
+
+    learning_words = []
+    text = ''
+
+    Message.spacer()
+
+    pdf_pointer = int(input("Enter the PDF file's number from above: "))
+
     while len(text) == 0:
         try:
-            with open(f"{pdf_pointer}.pdf", "rb") as f:
+            with open(f"{local_pdf[pdf_pointer-1]}", "rb") as f:
                 reader = PyPDF2.PdfReader(f)
                 for page in reader.pages:
                     text += page.extract_text()
         except FileNotFoundError:
-            pdf_pointer = input("File not found... please check PDF name and try again('example', not 'example.pdf'): ")
-
-    learning_words = []
+            pdf_pointer = int(input("File not found... Please re-enter number: "))
 
     for line in text.split("\n"):
         if not re.match(r'^\d+', line):
