@@ -10,6 +10,3 @@ def word_list_check(session_size, lst_length, halfmem):
         return lst_length + mem_length
     else:
         return session_size
-
-
-

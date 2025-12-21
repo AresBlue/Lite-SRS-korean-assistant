@@ -1,7 +1,7 @@
 import json, os, datetime
 
 def import_backup():
-    
+
     if os.path.exists("remembered_words.json"):
         with open("remembered_words.json", "r", encoding="utf-8") as f:
             remembered_words = json.load(f)
@@ -31,6 +31,5 @@ def import_backup():
 
     with open("learning_vocab-static.json", "r", encoding="utf-8") as f:
         lst_total_length = len(json.load(f))
-
 
     return remembered_words, halfmem, lst_total_length, loaded_words
