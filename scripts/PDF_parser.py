@@ -45,12 +45,3 @@ def pdf_parser():
     time.sleep(1)
 
 pdf_parser()
-
-
-
-
-
-
-
-
-

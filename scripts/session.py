@@ -1,8 +1,12 @@
-import json, secrets, os, re
+import json
+import secrets
+import os
+import re
 from scripts import Message
 from config import config
 
 def interim_session(remembered_words, right_words, wrong_words):
+
     if os.path.exists("interim.json"):
         print("Past session review:\n")
 
@@ -62,12 +66,3 @@ def session(session_size, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
-
-
-
-
-
-
-
-
-

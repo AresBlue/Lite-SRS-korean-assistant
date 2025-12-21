@@ -1,4 +1,5 @@
-import json, time
+import json
+import time
 from scripts import Message, wordlist_state, io_handler, session
 from config import config
 
@@ -59,7 +60,3 @@ def main():
 if __name__ == "__main__":
 
     main()
-
-
-
-
