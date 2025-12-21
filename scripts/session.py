@@ -16,8 +16,8 @@ def interim_session(remembered_words, right_words, wrong_words):
                 quiz_list.append(last_session.pop(idx))
 
             for remember in quiz_list:
-                attempt = input(f"\033[1;32m{remember['korean']}?\033[0m Please enter answer: ").strip().lower()
-                solution = [re.sub(r'[^a-zA-Z\s]', '', w).lower().strip() for w in remember['english'].split(',')]
+                attempt = re.sub(r'[^a-z\s]', '', input(f"\033[1;32m{remember['korean']}?\033[0m Please enter answer: ").lower()).strip()
+                solution = [re.sub(r'[^a-z\s]', '', w.lower()).strip() for w in remember['english'].split(',')]
                 attempt_words = attempt.split()
                 attempt_words.append(attempt)
                 if not any(ans in solution for ans in attempt_words):
@@ -62,6 +62,7 @@ def session(session_size, remembered_words, halfmem, available_words):
                 available_words.remove(word)
 
     return today_session, available_words
+
 
 
 
