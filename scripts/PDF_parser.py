@@ -39,6 +39,8 @@ def pdf_parser():
 
     while len(text) == 0:
         try:
+            if pdf_pointer < 1 or pdf_pointer > len(local_pdf):
+                pdf_pointer = int(input("Enter PDF file's number from above, stay within bounds: "))
             with open(f"{local_pdf[pdf_pointer-1]}", "rb") as f:
                 reader = PyPDF2.PdfReader(f)
                 for page in reader.pages:
@@ -72,7 +74,8 @@ def pdf_parser():
             old_static = json.load(f)
 
         for word_dict in old_static:
-            learning_words.append(word_dict)
+            if word_dict not in learning_words:
+                learning_words.append(word_dict)
 
     with open("learning_vocab-static.json", "w", encoding="utf-8") as f:
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
