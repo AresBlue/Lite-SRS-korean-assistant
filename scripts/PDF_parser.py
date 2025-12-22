@@ -65,6 +65,15 @@ def pdf_parser():
         print("Import looks good!")
     with open("learning_vocab.json", "w", encoding="utf-8") as f:
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
+
+
+    if os.path.exists("learning_vocab-static.json"):
+        with open("learning_vocab-static.json", "r", encoding="utf-8") as f:
+            old_static = json.load(f)
+
+        for word_dict in old_static:
+            learning_words.append(word_dict)
+
     with open("learning_vocab-static.json", "w", encoding="utf-8") as f:
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
 
