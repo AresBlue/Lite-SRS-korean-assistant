@@ -1,6 +1,9 @@
 import json
 import time
-from scripts import Message, wordlist_state, io_handler, session
+from scripts.Message import *
+from scripts import wordlist_state
+from scripts import io_handler
+from scripts import session
 from config import config
 
 def main():
@@ -13,9 +16,9 @@ def main():
     lst_length = len(loaded_words)
 
     print("\nKorean SRS learning assistant, good luck.")
-    Message.spacer()
-    Message.message_of_today(lst_length, lst_total_length, len(halfmem))
-    Message.spacer()
+    spacer()
+    message_of_today(lst_length, lst_total_length, len(halfmem))
+    spacer()
 
     remembered_words, right_words, wrong_words = session.interim_session(remembered_words, right_words, wrong_words)
 
@@ -52,7 +55,7 @@ def main():
         print(f"{i}: {w['korean']} - {w['english']}")
 
     try:
-        Message.spacer()
+        spacer()
         print("To quit session, please Ctrl+C...\n")
         while True:
             time.sleep(0.1)

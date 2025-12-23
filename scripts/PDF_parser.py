@@ -3,11 +3,11 @@ import re
 import json
 import random
 import time
-import Message
 import os
+from Message import spacer
 
 def pdf_parser():
-    Message.spacer()
+    spacer()
 
     target_dir = os.path.join(os.path.dirname(__file__), "..")
 
@@ -33,7 +33,7 @@ def pdf_parser():
     learning_words = []
     text = ''
 
-    Message.spacer()
+    spacer()
 
     pdf_pointer = int(input("Enter the PDF file's number from above: "))
 
@@ -55,7 +55,7 @@ def pdf_parser():
         entries = re.findall(r'(\d+)([^\d]+?)\s([^\d]+?)(?=\d|$)', line)
         for entry in entries:
             learning_words.append({"korean": entry[1].strip(), "english": entry[2].strip()})
-    Message.spacer()
+    spacer()
     sample = str(random.choice(learning_words))
     user_input = input(f"If the following is similar to this: 'korean': '경기장', 'english': 'stadium, arena' \nThen enter Y, else, PDF not compatible with parser.\n{sample}\nY/n:")
 
@@ -80,7 +80,7 @@ def pdf_parser():
     with open("learning_vocab-static.json", "w", encoding="utf-8") as f:
         json.dump(learning_words, f, ensure_ascii=False, indent=2)
 
-    Message.spacer()
+    spacer()
     time.sleep(0.1)
     print("Exiting PDF_parser. goodluck...")
     time.sleep(1)
