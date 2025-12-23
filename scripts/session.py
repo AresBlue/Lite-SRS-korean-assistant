@@ -22,10 +22,12 @@ def interim_session(remembered_words, right_words, wrong_words):
             for remember in quiz_list:
                 attempt = re.sub(r'[^a-z\s]', '', input(f"\033[1;32m{remember['korean']}?\033[0m Please enter answer: ").lower()).strip()
                 solution = [re.sub(r'[^a-z\s]', '', w.lower()).strip() for w in remember['english'].split(',')]
-                solution_parentheses = ''.join([m for w in remember['english'].split(',') for m in re.findall(r'\(([^)]*)\)', w)])
+                solution_parentheses = ''.join([m for w in remember['english'].lower().split(',') for m in re.findall(r'\(([^)]*)\)', w)])
 
+                parentheses_flag = False
                 meaning = ''
                 if len(solution_parentheses) > 1:
+                    parentheses_flag = True
                     meaning = f'(this word is the {solution_parentheses})'
                     for i in range(len(solution)):
                         solution[i] = solution[i].replace(solution_parentheses, '').strip()
@@ -35,13 +37,13 @@ def interim_session(remembered_words, right_words, wrong_words):
                 if not any(ans in solution for ans in attempt_words):
                     wrong_words.append(remember)
                     print(f"Wrong! Correct answer{'s' if len(solution) > 1 else ''} for \033[1;31m{remember['korean']}\033[0m "
-                          f"{'are' if len(solution) > 1 else 'is'}: \033[1;31m{', '.join(solution)}\033[0m {meaning if len(meaning) > 21 else ''}\n")
+                          f"{'are' if len(solution) > 1 else 'is'}: \033[1;31m{', '.join(solution)}\033[0m {meaning if parentheses_flag == True else ''}\n")
                     if remember in remembered_words:
                         print("\033[1;31mIt was in remembered words... write it down in your book for active external focus: "
                               f"\033[1;31m{remember['korean']}\033[0m {'are' if len(solution) > 1 else 'is'}: \033[1;31m{solution}\033[0m\033[0m\n")
                 else:
                     print(f"Correct :) the solution{'s' if len(solution) > 1 else ''} for \033[1;32m{remember['korean']}\033[0m "
-                          f"{'are' if len(solution) > 1 else 'is'}: \033[1;32m{', '.join(solution)}\033[0m {meaning if len(meaning) > 21 else ''}\n")
+                          f"{'are' if len(solution) > 1 else 'is'}: \033[1;32m{', '.join(solution)}\033[0m {meaning if parentheses_flag == True else ''}\n")
                     if remember in remembered_words:
                         print("repeated word, good job remembering :)\n")
                     else:
