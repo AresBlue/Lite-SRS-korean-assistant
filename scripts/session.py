@@ -1,5 +1,5 @@
 import json
-import secrets
+import random
 import os
 import re
 from scripts.Message import spacer
@@ -16,7 +16,7 @@ def interim_session(remembered_words, right_words, wrong_words):
             quiz_list = []
 
             while last_session:
-                idx = secrets.randbelow(len(last_session))
+                idx = random.randrange(len(last_session))
                 quiz_list.append(last_session.pop(idx))
 
             for remember in quiz_list:
@@ -57,24 +57,24 @@ def interim_session(remembered_words, right_words, wrong_words):
 def session(session_size, remembered_words, halfmem, available_words):
     today_session = []
     for _ in range(session_size):
-        r = secrets.randbelow(100)
+        r = random.randrange(100)
         if r < config["remembered_wordlist_pull"] and remembered_words:
-            word = secrets.choice(remembered_words)
+            word = random.choice(remembered_words)
             while word in today_session:
-                word = secrets.choice(remembered_words)
+                word = random.choice(remembered_words)
             today_session.append(word)
         elif r < config["halfmem_wordlist_pull"] and halfmem:
-            word = secrets.choice(halfmem)
+            word = random.choice(halfmem)
             while word in today_session:
-                word = secrets.choice(halfmem)
+                word = random.choice(halfmem)
             today_session.append(word)
         else:
             if available_words:
                 retry = 0
-                word = secrets.choice(available_words)
+                word = random.choice(available_words)
                 while word in today_session and retry < len(available_words):
                     retry += 1
-                    word = secrets.choice(available_words)
+                    word = random.choice(available_words)
                 today_session.append(word)
                 available_words.remove(word)
 

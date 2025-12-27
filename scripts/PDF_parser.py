@@ -82,7 +82,7 @@ def pdf_parser():
 
     spacer()
     time.sleep(0.1)
-    print("Exiting PDF_parser. goodluck...")
+    print("Exiting PDF_parser. Good luck...")
     time.sleep(1)
 
 pdf_parser()

@@ -20,4 +20,5 @@ IF NOT EXIST "learning_vocab.json" (
 
 python main.py
 
+exit
 
