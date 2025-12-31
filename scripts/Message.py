@@ -1,5 +1,5 @@
 def message_of_today(lst_length, lst_total_length, halfmem_length):
-    print(f"{100-(((lst_length+halfmem_length)/lst_total_length)*100):.1f}% done, including half remembered words!")
+    print(f"past failure wordlist length: {halfmem_length} \nunused words left: {lst_length}")
     percentage = (lst_length / lst_total_length) * 100
     if halfmem_length > 100:
         print("You might need to remediate off of half remembered list in 'halfmem.json'")
