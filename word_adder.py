@@ -1,12 +1,19 @@
 import json
 import os
+import re
 from scripts import io_handler
 
 def word_adder():
 
     def word_finder(wordlist, user_word):
         for word in wordlist:
-            if user_word in word["english"]:
+            pointer = [re.sub(r'[^a-z\s]', '', w.lower()).strip() for w in word["english"].split(',')]
+            parentheses = ''.join([m for s in word['english'].lower().split(',') for m in re.findall(r'\(([^)]*)\)', s)])
+
+            if len(parentheses) > 1:
+                for i in range(len(pointer)):
+                    pointer[i] = pointer[i].replace(parentheses, '').strip()
+            if user_word.lower() in pointer:
                 return word
         return None
 
@@ -43,21 +50,21 @@ def word_adder():
                 for i, (w, _) in enumerate(found_words, start=1):
                     print(f"{i}: {w['korean']} - {w['english']}")
 
-                choice = input("Please choose which word you'd like to add by it's number: ")
-                try: choice = int(choice)
-                except ValueError:
-                    choice = input("Please enter a number: ")
-
-                if choice < 1 or choice > len(found_words):
-                    choice = int(input("Stay within bounds of the possible word choices please: "))
-
+                while True:
+                    try:
+                        choice = int(input("Choose a number for a word above: "))
+                        if 1 <= choice <= len(found_words):
+                            break
+                    except ValueError:
+                        pass
+                    print("Invalid input. Try again.")
                 word, source = found_words[choice - 1]
 
                 if word in interim_data:
                     print("Word already in interim_data.")
                     return
 
-                if source is loaded_words:
+                if source == loaded_words:
                     loaded_words.remove(word)
 
                     with open("learning_vocab.json", "w", encoding="utf-8") as f:
