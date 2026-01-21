@@ -56,11 +56,11 @@ def main():
 
     try:
         spacer()
-        print("To quit session, please Ctrl+C...\n")
+        print("To quit session, please Ctrl+C...")
         while True:
             time.sleep(0.1)
     except KeyboardInterrupt:
-        print("Exiting SRS learning assistant, please review today's words...")
+        print("\nExiting SRS learning assistant, please review today's words...")
         time.sleep(1)
 
 if __name__ == "__main__":
