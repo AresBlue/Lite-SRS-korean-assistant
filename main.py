@@ -4,6 +4,7 @@ from scripts.Message import *
 from scripts import wordlist_state
 from scripts import io_handler
 from scripts import session
+from scripts import garbage_collector
 from config import config
 
 def main():
@@ -12,6 +13,8 @@ def main():
     session_size = config["session_size"]
 
     remembered_words, halfmem, lst_total_length, loaded_words = io_handler.import_backup()
+
+    loaded_words = garbage_collector.garbage_parser(loaded_words)
 
     lst_length = len(loaded_words)
 
