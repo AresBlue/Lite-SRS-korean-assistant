@@ -9,5 +9,5 @@ english_garbage_words = [
 ]
 
 korean_garbage_words = [
-
+    'TOPIK'
 ]
