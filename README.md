@@ -13,7 +13,11 @@ From here, you will be given the session word list, and then each time you rerun
 **Customization:**
 Current customization is just to alter the session size for each day as well as the percentages of past words and words you got wrong in previous runs, which is within the config.py script at the very top, change it as seen fit.
 
+**Bad data**
+If you find any unwanted part in the translation, you can add the unwanted part into the config's 'garbage' lists, it will remove all instances from the main word list.
+
 REQUIREMENTS:
 PyPDF2 python.
+
 
 
