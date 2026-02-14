@@ -48,7 +48,7 @@ def interim_session(remembered_words, right_words, wrong_words):
                         print("repeated word, good job remembering :)\n")
                     else:
                         remembered_words.append(remember)
-                        right_words.append(remember)
+                    right_words.append(remember)
             spacer()
     else:
         pass
@@ -77,5 +77,6 @@ def session(session_size, remembered_words, halfmem, available_words):
                     word = random.choice(available_words)
                 today_session.append(word)
                 available_words.remove(word)
+
 
     return today_session, available_words
