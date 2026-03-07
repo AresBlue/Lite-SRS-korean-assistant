@@ -43,7 +43,7 @@ def word_adder():
             if found_words == []:
                 print("No words found...")
                 translation = input("Please give translation: ").strip()
-                interim_data.append({"english": user_word, "translation": translation})
+                interim_data.append({"korean": translation, "english": user_word})
 
             else:
                 print("Found word(s):")
