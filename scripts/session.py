@@ -65,9 +65,12 @@ def session(session_size, remembered_words, halfmem, available_words):
             today_session.append(word)
         elif r < config["halfmem_wordlist_pull"] and halfmem:
             word = random.choice(halfmem)
-            while word in today_session:
+            retry = 0
+            while word in today_session and retry < len(halfmem):
+                retry += 1
                 word = random.choice(halfmem)
-            today_session.append(word)
+            if word not in today_session:
+                today_session.append(word)
         else:
             if available_words:
                 retry = 0
@@ -75,8 +78,9 @@ def session(session_size, remembered_words, halfmem, available_words):
                 while word in today_session and retry < len(available_words):
                     retry += 1
                     word = random.choice(available_words)
-                today_session.append(word)
-                available_words.remove(word)
+                if word not in today_session:
+                    today_session.append(word)
+                    available_words.remove(word)
 
 
     return today_session, available_words
