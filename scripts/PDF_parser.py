@@ -1,4 +1,4 @@
-import PyPDF2
+import pypdf
 import re
 import json
 import random
@@ -42,7 +42,7 @@ def pdf_parser():
             if pdf_pointer < 1 or pdf_pointer > len(local_pdf):
                 pdf_pointer = int(input("Enter PDF file's number from above, stay within bounds: "))
             with open(f"{local_pdf[pdf_pointer-1]}", "rb") as f:
-                reader = PyPDF2.PdfReader(f)
+                reader = pypdf.PdfReader(f)
                 for page in reader.pages:
                     text += page.extract_text()
         except FileNotFoundError:
