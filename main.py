@@ -48,10 +48,10 @@ def main():
         json.dump(today_session, f, ensure_ascii=False, indent=2)
 
     if len(available_words) == 0:
-        available_words = None # this will make the bat/bash scripts detect the lack of wordlist next run, calling pdf_parser
-
-    with open("learning_vocab.json", "w", encoding="utf-8") as f:
-        json.dump(available_words, f, ensure_ascii=False, indent=2)
+        open("learning_vocab.json", "w", encoding="utf-8").close() # this will make the bat/bash scripts detect the lack of wordlist next run, calling pdf_parser
+    else:
+        with open("learning_vocab.json", "w", encoding="utf-8") as f:
+            json.dump(available_words, f, ensure_ascii=False, indent=2)
 
     print("Today's session:")
     for i, w in enumerate(today_session, start=1):
